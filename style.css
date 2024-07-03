@@ -25,11 +25,14 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
+  background-color: antiquewhite;
   border: 2px solid #333;
   font-size: 2rem;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.3s;
+}
+.cell.empty {
+  background-color: #a9a3f3;
 }
 
 .cell:hover {

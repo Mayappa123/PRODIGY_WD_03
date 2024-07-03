@@ -1,9 +1,12 @@
 const cells = document.querySelectorAll(".cell");
 const message = document.getElementById("message");
 const resetButton = document.getElementById("resetButton");
-let currentPlayer = "X";
+let currentPlayer = "1️⃣";
 let gameState = ["", "", "", "", "", "", "", "", ""];
 let gameActive = true;
+let moveCountX = 0;
+let moveCountO = 0;
+let selectedCellIndex = -1; // Track the selected cell for moving a marker
 
 const winningConditions = [
   [0, 1, 2],
@@ -20,26 +23,61 @@ function handleCellClick(event) {
   const cell = event.target;
   const cellIndex = parseInt(cell.getAttribute("data-index"));
 
-  if (gameState[cellIndex] !== "" || !gameActive) {
+  if (!gameActive) {
     return;
   }
 
-  gameState[cellIndex] = currentPlayer;
-  cell.textContent = currentPlayer;
+  if (
+    selectedCellIndex !== -1 &&
+    cell.textContent === "" &&
+    gameState[selectedCellIndex] === currentPlayer
+  ) {
+    // Move marker to the new cell
+    gameState[selectedCellIndex] = "";
+    gameState[cellIndex] = currentPlayer;
+    cells[selectedCellIndex].textContent = "";
+    cell.textContent = currentPlayer;
+    selectedCellIndex = -1;
+    updateHighlight();
+    if (checkWin()) {
+      message.textContent = `Player ${currentPlayer} wins!`;
+      gameActive = false;
+      return;
+    }
+    currentPlayer = currentPlayer === "1️⃣" ? "2️⃣" : "1️⃣";
+    message.textContent = `Player ${currentPlayer}'s turn`;
+    return;
+  }
 
+  if (gameState[cellIndex] !== "") {
+    // Select marker to move
+    if (gameState[cellIndex] === currentPlayer) {
+      selectedCellIndex = cellIndex;
+      message.textContent = `Player ${currentPlayer}, move your marker`;
+    }
+    return;
+  }
+
+  if (currentPlayer === "1️⃣" && moveCountX < 3) {
+    gameState[cellIndex] = "1️⃣";
+    cell.textContent = "1️⃣";
+    moveCountX++;
+  } else if (currentPlayer === "2️⃣" && moveCountO < 3) {
+    gameState[cellIndex] = "2️⃣";
+    cell.textContent = "2️⃣";
+    moveCountO++;
+  } else {
+    return; 
+  }
+
+  updateHighlight();
   if (checkWin()) {
     message.textContent = `Player ${currentPlayer} wins!`;
     gameActive = false;
     return;
   }
 
-  if (gameState.every((cell) => cell !== "")) {
-    message.textContent = "Draw!";
-    gameActive = false;
-    return;
-  }
-
-  currentPlayer = currentPlayer === "X" ? "O" : "X";
+  currentPlayer = currentPlayer === "1️⃣" ? "2️⃣" : "1️⃣";
   message.textContent = `Player ${currentPlayer}'s turn`;
 }
 
@@ -54,15 +92,30 @@ function checkWin() {
   });
 }
 
+function updateHighlight() {
+  cells.forEach((cell, index) => {
+    if (gameState[index] === "") {
+      cell.classList.add("empty");
+    } else {
+      cell.classList.remove("empty");
+    }
+  });
+}
+
 function resetGame() {
   gameState = ["", "", "", "", "", "", "", "", ""];
   gameActive = true;
-  currentPlayer = "X";
+  currentPlayer = "1️⃣";
+  moveCountX = 0;
+  moveCountO = 0;
+  selectedCellIndex = -1;
   cells.forEach((cell) => (cell.textContent = ""));
+  updateHighlight();
   message.textContent = `Player ${currentPlayer}'s turn`;
 }
 
 cells.forEach((cell) => cell.addEventListener("click", handleCellClick));
 resetButton.addEventListener("click", resetGame);
 
+updateHighlight();
 message.textContent = `Player ${currentPlayer}'s turn`;
