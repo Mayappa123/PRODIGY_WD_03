@@ -34,13 +34,17 @@ function handleCellClick(event) {
   ) {
     // Move marker to the new cell
     gameState[selectedCellIndex] = "";
-    gameState[cellIndex] = currentPlayer;
     cells[selectedCellIndex].textContent = "";
+    cells[selectedCellIndex].style.backgroundColor = ""; // Reset the background color
+
+    gameState[cellIndex] = currentPlayer;
     cell.textContent = currentPlayer;
+    cell.style.backgroundColor = currentPlayer === "1️⃣" ? "green" : "yellow";
+
     selectedCellIndex = -1;
     updateHighlight();
     if (checkWin()) {
-      message.textContent = `Player ${currentPlayer} wins!`;
+      message.textContent = `Congratulations...player ${currentPlayer} won the game!`;
       gameActive = false;
       return;
     }
@@ -61,18 +65,20 @@ function handleCellClick(event) {
   if (currentPlayer === "1️⃣" && moveCountX < 3) {
     gameState[cellIndex] = "1️⃣";
     cell.textContent = "1️⃣";
+    cell.style.backgroundColor = "green";
     moveCountX++;
   } else if (currentPlayer === "2️⃣" && moveCountO < 3) {
     gameState[cellIndex] = "2️⃣";
     cell.textContent = "2️⃣";
+    cell.style.backgroundColor = "yellow";
     moveCountO++;
   } else {
-    return; 
+    return;
   }
 
   updateHighlight();
   if (checkWin()) {
-    message.textContent = `Player ${currentPlayer} wins!`;
+    message.textContent = `Congratulations...player ${currentPlayer} won the game!`;
     gameActive = false;
     return;
   }
@@ -109,7 +115,10 @@ function resetGame() {
   moveCountX = 0;
   moveCountO = 0;
   selectedCellIndex = -1;
-  cells.forEach((cell) => (cell.textContent = ""));
+  cells.forEach((cell) => {
+    cell.textContent = "";
+    cell.style.backgroundColor = "#a9a3f3";
+  });
   updateHighlight();
   message.textContent = `Player ${currentPlayer}'s turn`;
 }
