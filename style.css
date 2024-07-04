@@ -4,12 +4,13 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f4f7;
 }
 
 h1 {
-  margin-bottom: 00px;
+  margin-bottom: 20px;
+  color: #333;
 }
 
 #gameBoard {
@@ -31,26 +32,44 @@ h1 {
   border-radius: 15px;
   font-size: 2rem;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
+
 .cell.empty {
-  background-color: #b1e4db;
+  background-color: #d3e0ea;
 }
 
 .cell:hover {
-  background-color: #aa94dd;
+  background-color: #a0c4ff;
+  transform: scale(1.05);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
 #message {
   margin: 20px;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  color: #555;
 }
 
 #resetButton {
-  background-color: blue;
+  background-color: #007bff;
   color: white;
   border-radius: 10px;
   padding: 10px 20px;
   font-size: 1rem;
   cursor: pointer;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+#resetButton:hover {
+  background-color: #0056b3;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.message-highlight {
+  color: green;
 }

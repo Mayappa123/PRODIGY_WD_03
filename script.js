@@ -36,6 +36,7 @@ function handleCellClick(event) {
     gameState[selectedCellIndex] = "";
     cells[selectedCellIndex].textContent = "";
     cells[selectedCellIndex].style.backgroundColor = ""; // Reset the background color
+    cells[selectedCellIndex].style.opacity = "1"; // Reset opacity
 
     gameState[cellIndex] = currentPlayer;
     cell.textContent = currentPlayer;
@@ -45,7 +46,7 @@ function handleCellClick(event) {
     updateHighlight();
     if (checkWin()) {
       message.textContent = `Congratulations...player ${currentPlayer} won the game!`;
-      message.style.color = "green"; // Highlight the winning message in green
+      message.classList.add("message-highlight"); // Highlight the winning message
       gameActive = false;
       handleWin();
       return;
@@ -58,7 +59,11 @@ function handleCellClick(event) {
   if (gameState[cellIndex] !== "") {
     // Select marker to move
     if (gameState[cellIndex] === currentPlayer) {
+      if (selectedCellIndex !== -1) {
+        cells[selectedCellIndex].style.opacity = "1"; // Reset previous selected marker opacity
+      }
       selectedCellIndex = cellIndex;
+      cell.style.opacity = "0.2"; // Highlight selected marker
       message.textContent = `Player ${currentPlayer}, move your marker`;
     }
     return;
@@ -81,7 +86,7 @@ function handleCellClick(event) {
   updateHighlight();
   if (checkWin()) {
     message.textContent = `Congratulations...player ${currentPlayer} won the game!`;
-    message.style.color = "green"; // Highlight the winning message in green
+    message.classList.add("message-highlight"); // Highlight the winning message
     gameActive = false;
     handleWin();
     return;
@@ -133,6 +138,7 @@ function resetGame() {
     cell.style.backgroundColor = "#a9a3f3";
     cell.style.opacity = "1"; // Reset opacity
   });
+  message.classList.remove("message-highlight"); // Reset message highlight
   message.style.color = "black"; // Reset message color
   updateHighlight();
   message.textContent = `Player ${currentPlayer}'s turn`;
