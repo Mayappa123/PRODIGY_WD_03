@@ -46,6 +46,7 @@ function handleCellClick(event) {
     if (checkWin()) {
       message.textContent = `Congratulations...player ${currentPlayer} won the game!`;
       gameActive = false;
+      handleWin();
       return;
     }
     currentPlayer = currentPlayer === "1️⃣" ? "2️⃣" : "1️⃣";
@@ -80,6 +81,7 @@ function handleCellClick(event) {
   if (checkWin()) {
     message.textContent = `Congratulations...player ${currentPlayer} won the game!`;
     gameActive = false;
+    handleWin();
     return;
   }
 
@@ -95,6 +97,15 @@ function checkWin() {
       gameState[a] === gameState[b] &&
       gameState[a] === gameState[c]
     );
+  });
+}
+
+function handleWin() {
+  const losingMarker = currentPlayer === "1️⃣" ? "2️⃣" : "1️⃣";
+  cells.forEach((cell) => {
+    if (cell.textContent === losingMarker) {
+      cell.style.opacity = "0.3";
+    }
   });
 }
 
@@ -118,6 +129,7 @@ function resetGame() {
   cells.forEach((cell) => {
     cell.textContent = "";
     cell.style.backgroundColor = "#a9a3f3";
+    cell.style.opacity = "1"; // Reset opacity
   });
   updateHighlight();
   message.textContent = `Player ${currentPlayer}'s turn`;
