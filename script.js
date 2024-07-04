@@ -45,6 +45,7 @@ function handleCellClick(event) {
     updateHighlight();
     if (checkWin()) {
       message.textContent = `Congratulations...player ${currentPlayer} won the game!`;
+      message.style.color = "green"; // Highlight the winning message in green
       gameActive = false;
       handleWin();
       return;
@@ -80,6 +81,7 @@ function handleCellClick(event) {
   updateHighlight();
   if (checkWin()) {
     message.textContent = `Congratulations...player ${currentPlayer} won the game!`;
+    message.style.color = "green"; // Highlight the winning message in green
     gameActive = false;
     handleWin();
     return;
@@ -131,6 +133,7 @@ function resetGame() {
     cell.style.backgroundColor = "#a9a3f3";
     cell.style.opacity = "1"; // Reset opacity
   });
+  message.style.color = "black"; // Reset message color
   updateHighlight();
   message.textContent = `Player ${currentPlayer}'s turn`;
 }
