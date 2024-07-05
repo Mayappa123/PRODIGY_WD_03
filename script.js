@@ -5,8 +5,8 @@ const resetButton = document.getElementById("resetButton");
 let currentPlayer = "1️⃣";
 let gameState = ["", "", "", "", "", "", "", "", ""];
 let gameActive = true;
-let moveCountX = 0;
-let moveCountO = 0;
+let moveCount1 = 0;
+let moveCount2 = 0;
 let selectedCellIndex = -1; // Track the selected cell for moving a marker
 
 const winningConditions = [
@@ -85,16 +85,16 @@ function handleCellClick(event) {
     return;
   }
 
-  if (currentPlayer === "1️⃣" && moveCountX < 3) {
+  if (currentPlayer === "1️⃣" && moveCount1 < 3) {
     gameState[cellIndex] = "1️⃣";
     cell.textContent = "1️⃣";
     cell.style.backgroundColor = "green";
-    moveCountX++;
-  } else if (currentPlayer === "2️⃣" && moveCountO < 3) {
+    moveCount1++;
+  } else if (currentPlayer === "2️⃣" && moveCount2 < 3) {
     gameState[cellIndex] = "2️⃣";
     cell.textContent = "2️⃣";
     cell.style.backgroundColor = "yellow";
-    moveCountO++;
+    moveCount2++;
   } else {
     return;
   }
@@ -161,8 +161,8 @@ function resetGame() {
   gameState = ["", "", "", "", "", "", "", "", ""];
   gameActive = true;
   currentPlayer = "1️⃣";
-  moveCountX = 0;
-  moveCountO = 0;
+  moveCount1 = 0;
+  moveCount2 = 0;
   selectedCellIndex = -1;
   cells.forEach((cell) => {
     cell.textContent = "";
