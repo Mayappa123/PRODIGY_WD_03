@@ -1,5 +1,6 @@
 const cells = document.querySelectorAll(".cell");
 const message = document.getElementById("message");
+const errorMessage = document.getElementById("errorMessage");
 const resetButton = document.getElementById("resetButton");
 let currentPlayer = "1️⃣";
 let gameState = ["", "", "", "", "", "", "", "", ""];
@@ -27,6 +28,33 @@ function handleCellClick(event) {
     return;
   }
 
+  if (selectedCellIndex !== -1 && cellIndex === selectedCellIndex) {
+    // Deselect the marker
+    cells[selectedCellIndex].style.opacity = "1"; // Reset the opacity
+    resetHighlight(); // Reset the highlights
+    selectedCellIndex = -1;
+    message.textContent = `Player ${currentPlayer}'s turn`;
+    errorMessage.textContent = ""; // Clear error message
+    return;
+  }
+
+  if (gameState[cellIndex] !== "") {
+    if (gameState[cellIndex] !== currentPlayer) {
+      // Display error message
+      errorMessage.textContent = "It's not your turn!";
+      return;
+    }
+    // Select marker to move
+    if (gameState[cellIndex] === currentPlayer) {
+      selectedCellIndex = cellIndex;
+      cell.style.opacity = "0.2"; // Highlight the selected marker
+      highlightEmptyCells();
+      message.textContent = `Player ${currentPlayer}, move your marker`;
+      errorMessage.textContent = ""; // Clear error message
+    }
+    return;
+  }
+
   if (
     selectedCellIndex !== -1 &&
     cell.textContent === "" &&
@@ -35,37 +63,25 @@ function handleCellClick(event) {
     // Move marker to the new cell
     gameState[selectedCellIndex] = "";
     cells[selectedCellIndex].textContent = "";
-    cells[selectedCellIndex].style.backgroundColor = ""; // Reset the background color
-    cells[selectedCellIndex].style.opacity = "1"; // Reset opacity
+    cells[selectedCellIndex].style.backgroundColor = "#aa94dd"; // Reset the background color
+    cells[selectedCellIndex].style.opacity = "1.0"; 
 
     gameState[cellIndex] = currentPlayer;
     cell.textContent = currentPlayer;
     cell.style.backgroundColor = currentPlayer === "1️⃣" ? "green" : "yellow";
 
     selectedCellIndex = -1;
-    updateHighlight();
+    resetHighlight();
     if (checkWin()) {
       message.textContent = `Congratulations...player ${currentPlayer} won the game!`;
-      message.classList.add("message-highlight"); // Highlight the winning message
+      message.style.color = "green"; // Highlight the winning message in green
       gameActive = false;
       handleWin();
       return;
     }
     currentPlayer = currentPlayer === "1️⃣" ? "2️⃣" : "1️⃣";
     message.textContent = `Player ${currentPlayer}'s turn`;
-    return;
-  }
-
-  if (gameState[cellIndex] !== "") {
-    // Select marker to move
-    if (gameState[cellIndex] === currentPlayer) {
-      if (selectedCellIndex !== -1) {
-        cells[selectedCellIndex].style.opacity = "1"; // Reset previous selected marker opacity
-      }
-      selectedCellIndex = cellIndex;
-      cell.style.opacity = "0.2"; // Highlight selected marker
-      message.textContent = `Player ${currentPlayer}, move your marker`;
-    }
+    errorMessage.textContent = ""; // Clear error message
     return;
   }
 
@@ -86,7 +102,7 @@ function handleCellClick(event) {
   updateHighlight();
   if (checkWin()) {
     message.textContent = `Congratulations...player ${currentPlayer} won the game!`;
-    message.classList.add("message-highlight"); // Highlight the winning message
+    message.style.color = "green"; // Highlight the winning message in green
     gameActive = false;
     handleWin();
     return;
@@ -94,6 +110,7 @@ function handleCellClick(event) {
 
   currentPlayer = currentPlayer === "1️⃣" ? "2️⃣" : "1️⃣";
   message.textContent = `Player ${currentPlayer}'s turn`;
+  errorMessage.textContent = ""; // Clear error message
 }
 
 function checkWin() {
@@ -113,6 +130,20 @@ function handleWin() {
     if (cell.textContent === losingMarker) {
       cell.style.opacity = "0.3";
     }
+  });
+}
+
+function highlightEmptyCells() {
+  cells.forEach((cell, index) => {
+    if (gameState[index] === "") {
+      cell.classList.add("highlight-empty");
+    }
+  });
+}
+
+function resetHighlight() {
+  cells.forEach((cell) => {
+    cell.classList.remove("highlight-empty");
   });
 }
 
@@ -138,8 +169,8 @@ function resetGame() {
     cell.style.backgroundColor = "#a9a3f3";
     cell.style.opacity = "1"; // Reset opacity
   });
-  message.classList.remove("message-highlight"); // Reset message highlight
   message.style.color = "black"; // Reset message color
+  errorMessage.textContent = ""; // Clear error message
   updateHighlight();
   message.textContent = `Player ${currentPlayer}'s turn`;
 }

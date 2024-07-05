@@ -4,72 +4,75 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f0f4f7;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #ffcc70, #ff6991);
+  color: #333;
 }
 
 h1 {
   margin-bottom: 20px;
-  color: #333;
+  font-size: 2.5rem;
+  color: #fff;
+  text-shadow: 2px 2px #333;
 }
 
 #gameBoard {
-  height: 300px;
-  width: 300px;
   display: grid;
   grid-template-columns: repeat(3, 100px);
   grid-template-rows: repeat(3, 100px);
-  gap: 5px;
+  gap: 10px;
 }
 
 .cell {
+  position: relative;
   width: 100px;
   height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #333;
+  border: 2px solid #fff;
   border-radius: 15px;
-  font-size: 2rem;
+  font-size: 2.5rem;
   cursor: pointer;
-  background-color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  transition: background-color 0.3s, transform 0.3s, opacity 0.3s;
+   background-color: #f0f0f0; 
+  background-color: #aa94dd;
 }
 
 .cell.empty {
-  background-color: #d3e0ea;
+  background-color: #dec1e6;
 }
 
+
 .cell:hover {
-  background-color: #a0c4ff;
-  transform: scale(1.05);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  background-color: #aa94dd;
 }
 
 #message {
   margin: 20px;
   font-size: 1.5rem;
-  color: #555;
+  color: #fff;
+  text-shadow: 1px 1px #333;
+}
+
+#errorMessage {
+  margin: 10px;
+  font-size: 1rem;
+  color: red;
 }
 
 #resetButton {
-  background-color: #007bff;
-  color: white;
+  background-color: #333;
+  color: #fff;
   border-radius: 10px;
   padding: 10px 20px;
   font-size: 1rem;
   cursor: pointer;
-  border: none;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s, box-shadow 0.3s;
+  transition: background-color 0.3s;
 }
 
 #resetButton:hover {
-  background-color: #0056b3;
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  background-color: #555;
 }
 
-.message-highlight {
-  color: green;
-}
+
