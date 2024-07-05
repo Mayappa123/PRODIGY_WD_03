@@ -27,20 +27,20 @@ You can play the game [here](link-to-live-demo).
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/Mayappa123/tic-tac-toe.git
+    git clone https://github.com/Mayappa123/PRODIGY_WD_03.git
     ```
 
 2. Navigate to the project directory:
 
     ```bash
-    cd tic-tac-toe
+    cd PRODIGY_WD_03
     ```
 
 3. Open `index.html` in your web browser to play the game locally.
 
 ## Usage
 
-- Click on a cell to place your marker (X or O).
+- Click on a cell to place your marker (1️⃣ or 2️⃣).
 - The game will display the current player's turn.
 - The game will announce the winner or a draw once the game ends.
 - Click the "Reset Game" button to start a new game.
@@ -48,7 +48,7 @@ You can play the game [here](link-to-live-demo).
 ## Game Rules
 
 - The game is played on a 3x3 grid.
-- Players take turns placing their marker (X or O) in an empty cell.
+- Players take turns placing their marker (1️⃣ or 2️⃣) in an empty cell.
 - The first player to get three of their markers in a row (horizontally, vertically, or diagonally) wins.
 - If all cells are filled and no player has three markers in a row, the game is a draw.
 
