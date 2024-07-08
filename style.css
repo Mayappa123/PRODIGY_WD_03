@@ -4,9 +4,11 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   background: linear-gradient(135deg, #ffcc70, #ff6991);
-  color: #333;
+  background-image: url("https://media.istockphoto.com/id/825160832/photo/tic-tac-toe-xo-game-tic-tac-toe-x-game-o-3d-illustration.webp?b=1&s=170667a&w=0&k=20&c=_P6mrGYZcebVXR80yYuFUwcmDADkbDBYQ-GEhPOmrSw=");
+  backdrop-filter: blur(100px);
+  background-repeat: repeat;
 }
 
 h1 {
@@ -35,14 +37,14 @@ h1 {
   font-size: 2.5rem;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s, opacity 0.3s;
-   background-color: #f0f0f0; 
+  background-color: #f0f0f0;
   background-color: #aa94dd;
 }
 
 .cell.empty {
-  background-color: #dec1e6;
+  /* background-color: #dec1e6; */
+  background-color: #a9a3f3;
 }
-
 
 .cell:hover {
   background-color: #aa94dd;
@@ -60,7 +62,6 @@ h1 {
   font-size: 18px;
   color: red;
   text-shadow: 1px 1px #f78484;
-
 }
 
 #resetButton {
@@ -76,5 +77,3 @@ h1 {
 #resetButton:hover {
   background-color: #555;
 }
-
-
