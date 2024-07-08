@@ -14,7 +14,11 @@ This is a simple Tic Tac Toe game built using HTML, CSS, and JavaScript. The gam
 
 ## Demo
 
+<<<<<<< HEAD
 You can play the game [here](https://mayappa123.github.io/PRODIGY_WD_03/).
+=======
+You can play the game [here](<a src="https://mayappa123.github.io/PRODIGY_WD_03/">Play</a>).
+>>>>>>> 6934cbe00e24ed2813d6e3d0a05e8bf305e8fe6a
 
 ## Features
 
