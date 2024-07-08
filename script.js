@@ -7,7 +7,7 @@ let gameState = ["", "", "", "", "", "", "", "", ""];
 let gameActive = true;
 let moveCount1 = 0;
 let moveCount2 = 0;
-let selectedCellIndex = -1; // Track the selected cell for moving a marker
+let selectedCellIndex = -1; 
 
 const winningConditions = [
   [0, 1, 2],
@@ -29,39 +29,35 @@ function handleCellClick(event) {
   }
 
   if (selectedCellIndex !== -1 && cellIndex === selectedCellIndex) {
-    // Deselect the marker
-    cells[selectedCellIndex].style.opacity = "1"; // Reset the opacity
-    resetHighlight(); // Reset the highlights
+    cells[selectedCellIndex].style.opacity = "1"; 
+    resetHighlight(); 
     selectedCellIndex = -1;
     message.textContent = `Player ${currentPlayer}'s turn`;
-    errorMessage.textContent = ""; // Clear error message
+    errorMessage.textContent = ""; 
     return;
   }
 
   if (gameState[cellIndex] !== "") {
     if (gameState[cellIndex] !== currentPlayer) {
-      // Display error message
-      errorMessage.textContent = "😡 It's not your turn!";
+      errorMessage.textContent = "It's not your turn!";
       errorMessage.style.display = "block";
       setTimeout(() => {
         errorMessage.style.display = "none";
       }, 2000);
       return;
     }
-    // Select marker to move, only if the player has already placed all 3 markers
     if (
       gameState[cellIndex] === currentPlayer &&
       (currentPlayer === "1️⃣" ? moveCount1 : moveCount2) === 3
     ) {
       if (selectedCellIndex !== -1) {
-        // Deselect previous marker if a new one is selected
         cells[selectedCellIndex].style.opacity = "1";
       }
       selectedCellIndex = cellIndex;
-      cell.style.opacity = "0.2"; // Highlight the selected marker
+      cell.style.opacity = "0.2"; 
       highlightEmptyCells();
       message.textContent = `Player ${currentPlayer}, move your marker`;
-      errorMessage.textContent = ""; // Clear error message
+      errorMessage.textContent = ""; 
     }
     return;
   }
@@ -71,7 +67,6 @@ function handleCellClick(event) {
     cell.textContent === "" &&
     gameState[selectedCellIndex] === currentPlayer
   ) {
-    // Move marker to the new cell
     gameState[selectedCellIndex] = "";
     cells[selectedCellIndex].textContent = "";
     cells[selectedCellIndex].style.backgroundColor = "#aa94dd"; // Reset the background color
@@ -85,15 +80,14 @@ function handleCellClick(event) {
     resetHighlight();
     if (checkWin()) {
       message.textContent = `Congratulations...player ${currentPlayer} won the game!`;
-      message.style.color = "green"; // Highlight the winning message in green
+      message.style.color = "green";
       gameActive = false;
       handleWin();
       return;
     }
     currentPlayer = currentPlayer === "1️⃣" ? "2️⃣" : "1️⃣";
     message.textContent = `Player ${currentPlayer}'s turn`;
-    errorMessage.textContent = ""; // Clear error message
-    return;
+    errorMessage.textContent = ""; 
   }
 
   if (
@@ -101,7 +95,6 @@ function handleCellClick(event) {
     gameState[cellIndex] !== "" &&
     gameState[cellIndex] !== currentPlayer
   ) {
-    // Error message when trying to move to an occupied cell
     errorMessage.textContent = "Marker already placed in this cell!";
     errorMessage.style.display = "block";
     setTimeout(() => {
@@ -127,7 +120,7 @@ function handleCellClick(event) {
   updateHighlight();
   if (checkWin()) {
     message.textContent = `Congratulations...player ${currentPlayer} won the game!`;
-    message.style.color = "green"; // Highlight the winning message in green
+    message.style.color = "green"; 
     gameActive = false;
     handleWin();
     return;
@@ -135,7 +128,7 @@ function handleCellClick(event) {
 
   currentPlayer = currentPlayer === "1️⃣" ? "2️⃣" : "1️⃣";
   message.textContent = `Player ${currentPlayer}'s turn`;
-  errorMessage.textContent = ""; // Clear error message
+  errorMessage.textContent = ""; 
 }
 
 function checkWin() {
@@ -192,16 +185,19 @@ function resetGame() {
   cells.forEach((cell) => {
     cell.textContent = "";
     cell.style.backgroundColor = "#a9a3f3";
-    cell.style.opacity = "1"; // Reset opacity
+    cell.style.opacity = "1"; 
   });
-  message.style.color = "black"; // Reset message color
-  errorMessage.textContent = ""; // Clear error message
+  message.style.color = "black"; 
+  errorMessage.textContent = ""; 
   updateHighlight();
   message.textContent = `Player ${currentPlayer}'s turn`;
 }
 
 cells.forEach((cell) => cell.addEventListener("click", handleCellClick));
-resetButton.addEventListener("click", resetGame);
+resetButton.addEventListener("click", () => {
+  resetGame;
+  location.reload();
+});
 
 updateHighlight();
 message.textContent = `Player ${currentPlayer}'s turn`;

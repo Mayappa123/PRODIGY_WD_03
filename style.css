@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+
 body {
   display: flex;
   flex-direction: column;
@@ -18,6 +20,7 @@ body {
 
 h1 {
   margin-bottom: 20px;
+  margin-top: 0px;
   font-size: 2.5rem;
   color: #fff;
   text-shadow: 2px 2px #333;
@@ -52,7 +55,9 @@ h1 {
 }
 
 .cell:hover {
-  background-color: #672cf0;
+  background-color: #8effd4;
+  background: transparent;
+  backdrop-filter: blur(20px);
 }
 
 #message {
@@ -80,7 +85,22 @@ h1 {
 }
 
 #resetButton:hover {
-  background-color: #555;
+  background-color: blue;
+}
+
+footer {
+  position: fixed;
+  bottom: 0px;
+}
+
+.developer {
+  font-family: "Dancing Script", cursive;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  bottom: 0px;
 }
 
 /* Media queries for responsive design */
@@ -90,9 +110,9 @@ h1 {
   }
 
   #gameBoard {
-    grid-template-columns: repeat(3, 80px);
-    grid-template-rows: repeat(3, 80px);
-    gap: 8px;
+    grid-template-columns: repeat(3, 90px);
+    grid-template-rows: repeat(3, 90px);
+    gap: 2px;
   }
 
   .cell {
@@ -102,11 +122,11 @@ h1 {
   }
 
   #message {
-    font-size: 1.2rem;
+    font-size: 18px;
   }
 
   #errorMessage {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   #resetButton {
@@ -117,27 +137,27 @@ h1 {
 
 @media (max-width: 480px) {
   h1 {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
 
   #gameBoard {
-    grid-template-columns: repeat(3, 60px);
-    grid-template-rows: repeat(3, 60px);
-    gap: 6px;
+    grid-template-columns: repeat(3, 90px);
+    grid-template-rows: repeat(3, 90px);
+    gap: 2px;
   }
 
   .cell {
-    width: 60px;
-    height: 60px;
-    font-size: 1.5rem;
+    width: 80px;
+    height: 80px;
+    font-size: 1.8rem;
   }
 
   #message {
-    font-size: 12px;
+    font-size: 15px;
   }
 
   #errorMessage {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   #resetButton {
