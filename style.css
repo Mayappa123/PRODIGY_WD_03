@@ -3,12 +3,17 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 0;
+  padding: 0;
   height: 100vh;
+  width: 100vw;
   font-family: "Arial", sans-serif;
-  background: linear-gradient(135deg, #ffcc70, #ff6991);
   background-image: url("https://media.istockphoto.com/id/825160832/photo/tic-tac-toe-xo-game-tic-tac-toe-x-game-o-3d-illustration.webp?b=1&s=170667a&w=0&k=20&c=_P6mrGYZcebVXR80yYuFUwcmDADkbDBYQ-GEhPOmrSw=");
-  backdrop-filter: blur(100px);
-  background-repeat: repeat;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  backdrop-filter: blur(95px);
 }
 
 h1 {
@@ -47,7 +52,7 @@ h1 {
 }
 
 .cell:hover {
-  background-color: #aa94dd;
+  background-color: #672cf0;
 }
 
 #message {
@@ -76,4 +81,67 @@ h1 {
 
 #resetButton:hover {
   background-color: #555;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  #gameBoard {
+    grid-template-columns: repeat(3, 80px);
+    grid-template-rows: repeat(3, 80px);
+    gap: 8px;
+  }
+
+  .cell {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+  }
+
+  #message {
+    font-size: 1.2rem;
+  }
+
+  #errorMessage {
+    font-size: 16px;
+  }
+
+  #resetButton {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  #gameBoard {
+    grid-template-columns: repeat(3, 60px);
+    grid-template-rows: repeat(3, 60px);
+    gap: 6px;
+  }
+
+  .cell {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  #message {
+    font-size: 12px;
+  }
+
+  #errorMessage {
+    font-size: 14px;
+  }
+
+  #resetButton {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
 }
